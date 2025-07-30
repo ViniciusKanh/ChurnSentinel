@@ -1,0 +1,22 @@
+# Núcleo do modelo e treinamento
+transformers==4.41.2
+torch==2.2.2
+datasets==2.19.1
+accelerate==0.30.1
+scikit-learn==1.5.0
+
+# Manipulação e leitura de dados
+pandas==2.2.2
+openpyxl==3.1.2
+
+# Visualização e monitoramento (opcional)
+matplotlib==3.9.0
+seaborn==0.13.2
+
+# Utilitários
+tqdm==4.66.4
+
+# API (caso use FastAPI futuramente)
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+python-multipart==0.0.9

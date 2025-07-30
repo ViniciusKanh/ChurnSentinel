@@ -1,0 +1,24 @@
+# Ignore ambiente virtual
+env_ChurnSentinel/
+
+# Ignore modelos treinados (grandes)
+app/model/
+
+# Arquivos temporários / logs
+*.log
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+
+# Dados pesados ou pessoais
+*.xlsx
+*.csv
+
+# Jupyter notebooks temporários
+.ipynb_checkpoints/
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*.so
