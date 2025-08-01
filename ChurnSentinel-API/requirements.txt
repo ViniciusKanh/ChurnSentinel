@@ -1,0 +1,5 @@
+gradio
+# Se usar modelos Hugging Face ou PyTorch:
+transformers
+torch
+# Outras dependências do seu projeto, se houver

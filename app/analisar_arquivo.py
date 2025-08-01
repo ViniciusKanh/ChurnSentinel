@@ -7,6 +7,7 @@ from torch.nn.functional import softmax
 import torch
 from tqdm import tqdm
 from pathlib import Path
+import sys
 
 # ✅ Caminho do modelo fine-tuned salvo após treinamento
 MODEL_DIR = Path(__file__).parent / "model" / "bert-fuga-churnsentinel"
@@ -21,10 +22,10 @@ model = AutoModelForSequenceClassification.from_pretrained(MODEL_DIR, local_file
 model.eval()
 
 # ✅ Mapeamento das classes (ordem dos índices)
+# ✅ ajuste correto p/ binário
 label_map = {
-    0: "fidelidade",
-    1: "fuga",
-    2: "neutro"
+    0: "nao_fuga",   # ou "ok", "normal"… como preferir
+    1: "fuga"
 }
 
 def inferir_batch(textos):
@@ -60,6 +61,13 @@ def analisar_excel(caminho, coluna_texto="Resumo", batch_size=64):
     df.to_excel(saida, index=False)
     print(f"✅ Resultado salvo em: {saida}")
 
+
+...
 if __name__ == "__main__":
-    caminho_arquivo = Path(__file__).parent.parent / "Relacionamentos e NPS-2025-07-29-10-26-26.xlsx"
-    analisar_excel(caminho=caminho_arquivo)
+    caminho_arquivo = (
+        Path(sys.argv[1])                     # se você passou um caminho
+        if len(sys.argv) > 1
+        else Path(__file__).parent.parent / "data" / "Relacionamentos e NPS.xlsx"
+    )
+    analisar_excel(caminho_arquivo)
+
