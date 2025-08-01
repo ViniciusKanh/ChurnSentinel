@@ -9,7 +9,7 @@ from tqdm import tqdm
 from pathlib import Path
 
 # ✅ Caminho do modelo fine-tuned salvo após treinamento
-MODEL_DIR = Path(__file__).parent / "model" / "bert-finetuned-churnsentinel"
+MODEL_DIR = Path(__file__).parent / "model" / "bert-fuga-churnsentinel"
 MODEL_DIR = MODEL_DIR.resolve().as_posix()
 
 # ✅ Configuração do dispositivo (usa GPU se disponível)

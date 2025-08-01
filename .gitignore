@@ -22,3 +22,8 @@ app/model/
 __pycache__/
 *.py[cod]
 *.so
+
+# datasets gerados
+data/fuga_dataset.csv
+
+data/
