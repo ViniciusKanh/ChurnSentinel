@@ -5,10 +5,9 @@ Uso: python -m train.prep_fuga_dataset
 import re, pandas as pd
 from pathlib import Path
 
-RAW_XLSX   = Path("data/Relacionamento e NPS.xlsx")     # coloque aqui ou ajuste path
-OUT_CSV    = Path("data/fuga_dataset.csv")            # saída final
+RAW_XLSX = Path("data/Relacionamento e NPS.xlsx")
+OUT_CSV  = Path("data/fuga_dataset.csv")
 
-# ——————————————————————————————————————————————————————
 REGEX_FUGA = re.compile(
     r"\b("
     r"migrar|migração|migrou|mudaram|trocar|substituir|"
@@ -20,15 +19,20 @@ REGEX_FUGA = re.compile(
 )
 
 def marca_fuga(texto: str) -> int:
-    return int(bool(REGEX_FUGA.search(texto)))
+    texto = texto.lower()
+    if "zimbra" in texto:
+        return 0  # está mencionando nosso produto, não rotule como fuga
+    if REGEX_FUGA.search(texto):
+        return 1
+    return 0
 
 def main():
     df = pd.read_excel(RAW_XLSX)
     if "Resumo" not in df.columns:
         raise ValueError("Coluna 'Resumo' não encontrada!")
 
-    df["texto"]  = df["Resumo"].fillna("").astype(str).str.lower()
-    df["label"]  = df["texto"].apply(marca_fuga)          # 1 = fuga
+    df["texto"] = df["Resumo"].fillna("").astype(str).str.lower()
+    df["label"] = df["texto"].apply(marca_fuga)
     df[["texto", "label"]].to_csv(OUT_CSV, index=False, sep=";")
     print(f"✅ Dataset salvo em {OUT_CSV.resolve()} — {df.label.value_counts().to_dict()}")
 
