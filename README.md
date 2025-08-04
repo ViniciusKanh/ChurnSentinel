@@ -1,20 +1,48 @@
 # 🏢 ChurnSentinel API
-
 ## 🚨 O que é?
 
-**ChurnSentinel API** é uma solução baseada em Inteligência Artificial criada para **detectar automaticamente o risco de fuga (churn) de clientes** a partir de textos de relacionamento e respostas de NPS. É seu sentinela digital que monitora sinais de evasão para equipes de Customer Success agirem antes da perda acontecer!
+**ChurnSentinel API** é uma plataforma inteligente desenvolvida para **identificação preditiva do risco de churn (fuga) de clientes** em ambientes SaaS e serviços recorrentes.  
+O sistema emprega modelos avançados de **Processamento de Linguagem Natural (NLP)**, usando aprendizado de máquina supervisionado (fine-tuning de BERT em português), para **interpretar sinais, sentimentos e intenções presentes em textos de relacionamento, respostas de NPS, tickets e históricos de contato**.
+
+Agindo como um verdadeiro **sentinela digital**, a solução monitora, avalia e alerta as equipes de Customer Success sobre potenciais riscos de evasão, permitindo que estratégias proativas sejam aplicadas antes do cliente abandonar a base.
 
 ---
 
 ## 💡 Como funciona?
 
-O modelo faz a **análise de sentimentos e padrões** em frases e comentários vindos de pesquisas NPS ou interações de relacionamento.  
-Ele identifica termos e contextos que historicamente indicam alta chance de cancelamento ou migração do cliente para outra plataforma, gerando uma predição automática ("FUGA" ou "Não Fuga").
+O pipeline do **ChurnSentinel** opera em três etapas principais:
 
-- **Entrada:** Texto individual (ex: comentário de cliente) ou planilha Excel (.xlsm, .xlsx) com a coluna `Resumo`
-- **Saída:** Predição de risco (Alto risco de churn ou Não fuga)
+1. **Coleta e Normalização**  
+   Textos de interações com clientes (NPS, chamados, feedbacks, e-mails, registros de CRM) são reunidos e **normalizados** (minúsculas, limpeza de caracteres, remoção de ruídos).
+
+2. **Detecção de Padrões e Sinais de Risco**  
+   O modelo examina o texto em busca de padrões linguísticos, palavras-chave e contextos que indicam **potencial intenção de migração, insatisfação, testes de concorrentes, pedidos de cancelamento** ou outras situações correlatas.  
+   Ele diferencia menções contextuais (“estamos testando o Gmail”) de casos neutros (“cliente utiliza Office, mas está satisfeito com Zimbra”).
+
+3. **Classificação e Predição**  
+   - **Entrada:**  
+     - Texto individual (ex: comentário de cliente, chamado, resposta NPS)  
+     - Ou planilha Excel (.xlsm, .xlsx) com a coluna `Resumo` contendo os textos a analisar
+   - **Processamento:**  
+     - O texto é transformado em embeddings pelo modelo BERT, que avalia a probabilidade de pertencer às classes **fuga** ou **não fuga**
+   - **Saída:**  
+     - Predição binária:  
+       - `"FUGA"` (alto risco de churn, recomenda ação imediata)
+       - `"Não Fuga"` (baixo risco de churn, monitoramento rotineiro)
+     - Score de confiança para priorização dos casos
+
+O usuário pode interagir via interface web, enviando frases ou planilhas completas, e baixar relatórios detalhados das análises para integrar aos processos internos.
 
 ---
+
+### ⚡ **Diferenciais**
+- Modelagem baseada em exemplos reais, com refinamento de regras para minimizar falsos positivos.
+- Pipeline flexível: fácil de adaptar para outros setores, linguagens e domínios.
+- Apoio a análises em lote via planilhas — ideal para operações CS de alta escala.
+- Fácil integração com sistemas internos (via API ou batch).
+
+---
+
 
 ## 🔬 Como é treinado o modelo?
 
@@ -60,7 +88,7 @@ O ChurnSentinel utiliza o BERT em português (modelo base `neuralmind/bert-large
 
 Acesse o Space do Hugging Face para testar online (sem instalar nada):
 
-👉 https://huggingface.co/spaces/ViniciusKanh/ChurnSentinel-API
+👉 https://huggingface.co/spaces/ViniciusKhan/ChurnSentinel-API
 
 ---
 
